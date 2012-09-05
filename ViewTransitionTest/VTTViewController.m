@@ -10,20 +10,38 @@
 
 @interface VTTViewController ()
 
+@property UIView *fromView;
+@property UIView *toView;
+@property UIView *containerView;
+
 @end
 
 @implementation VTTViewController
 
-- (void)viewDidLoad
+- (CGRect)frame;
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    return CGRectMake(0.0, 0.0, 100.0, 100.0);
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewDidAppear:(BOOL)animated;
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidAppear:animated];
+    
+    CGRect containerFrame = CGRectMake(100.0, 100.0, 100.0, 100.0);
+    self.containerView = [[UIView alloc] initWithFrame:containerFrame];
+    [self.view addSubview:self.containerView];
+    
+    self.fromView = [[UIView alloc] initWithFrame:self.frame];
+    self.fromView.backgroundColor = [UIColor blueColor];
+    [self.containerView addSubview:self.fromView];
+}
+
+- (IBAction)transition:(id)sender;
+{
+    self.toView = [[UIView alloc] initWithFrame:self.frame];
+    self.toView.backgroundColor = [UIColor redColor];
+    
+    [UIView transitionFromView:self.fromView toView:self.toView duration:2.0 options:UIViewAnimationOptionTransitionFlipFromLeft completion:nil];
 }
 
 @end

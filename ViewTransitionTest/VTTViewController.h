@@ -10,4 +10,6 @@
 
 @interface VTTViewController : UIViewController
 
+- (IBAction)transition:(id)sender;
+
 @end
